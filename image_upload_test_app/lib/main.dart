@@ -42,31 +42,36 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Container(
-        padding: const EdgeInsets.only(top: 30),
         alignment: Alignment.center,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Container(
-              width: 300,
-              height: 300,
-              decoration: BoxDecoration(
-                color: Colors.amber[600],
-              ),
-              child: Center(
-                child: _image == null
-                ? const Text('No image selected')
-                : Image.file(
-                  File(_image!.path),
-                  width: 300,
-                  height: 300,
-                  fit: BoxFit.cover,
+            // 이미지 컨테이너
+            Expanded(
+              child: Container(
+                //height: 550,
+                decoration: BoxDecoration(
+                  color: Colors.blueGrey[800],
+                ),
+                child: Center(
+                  child: _image == null
+                  ? const CircularProgressIndicator()
+                  //? const Text('No image selected')
+                  : Image.file(
+                    File(_image!.path),
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),
-            FloatingActionButton(
-              onPressed: getImageFromGallery,
-              tooltip: 'Pick Image',
-              child: const Text("Upload"),
+            
+            // 버튼 컨테이너
+            SizedBox(
+              width: 50,
+              child: ElevatedButton(
+                onPressed: getImageFromGallery,
+                child: const Text("Upload"),
+              ),
             ),
           ],
         ), 
